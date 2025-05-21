@@ -4,5 +4,22 @@ GET http://localhost:5239/api/restaurants/
 Accept: application/json
 ###
 
-GET http://localhost:5239/api/restaurants/1
+GET http://localhost:5239/api/restaurants/3
 Accept: application/json
+
+###
+
+POST http://localhost:5239/api/restaurants
+Content-Type: application/json
+
+{
+  "Name": "Test Restaurant",
+  "Description": "Test Description",
+  "Category": "Fine Dining",
+  "HasDelivery": true,
+  "ContactEmail": "ogabek@gmail.com",
+  "ContactNumber": "1234567890",
+  "City": "Tashkent",
+  "Street": "Tashkent Street",
+  "PostalCode": "100000"
+}
