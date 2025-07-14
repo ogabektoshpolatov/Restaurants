@@ -13,6 +13,7 @@ POST http://localhost:5239/api/restaurants
 Content-Type: application/json
 
 {
+  "Name": "Test",
   "Description": "Test Description",
   "Category": "Fine Dining",
   "HasDelivery": true,
@@ -22,3 +23,6 @@ Content-Type: application/json
   "Street": "Tashkent Street",
   "PostalCode": "100000"
 }
+
+###
+DELETE http://localhost:5239/api/restaurants/5
