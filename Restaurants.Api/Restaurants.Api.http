@@ -4,7 +4,7 @@ GET http://localhost:5239/api/restaurants/
 Accept: application/json
 ###
 
-GET http://localhost:5239/api/restaurants/1
+GET http://localhost:5239/api/restaurants/5
 Accept: application/json
 
 ###
@@ -13,7 +13,7 @@ POST http://localhost:5239/api/restaurants
 Content-Type: application/json
 
 {
-  "Name": "Test",
+  "Name": "Delete Action",
   "Description": "Test Description",
   "Category": "Fine Dining",
   "HasDelivery": true,
@@ -26,3 +26,15 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5239/api/restaurants/5
+
+###
+
+PATCH http://localhost:5239/api/restaurants/5
+Content-Type: application/json
+
+{
+  "Name": "Update Action",
+  "Description": "This is simple restaurant Description",
+  "HasDelivery": false
+}
+

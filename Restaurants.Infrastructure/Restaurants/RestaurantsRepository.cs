@@ -21,6 +21,9 @@ internal class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaura
         await dbContext.SaveChangesAsync();
     }
 
+    public Task SaveChanges() 
+        => dbContext.SaveChangesAsync();
+
     public async Task<IEnumerable<Restaurant>> GetAllRestaurantsAsync()
     {
         var restaurants = await dbContext.Restaurants.ToListAsync();
