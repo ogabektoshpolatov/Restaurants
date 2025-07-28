@@ -13,7 +13,7 @@ POST http://localhost:5239/api/restaurants
 Content-Type: application/json
 
 {
-  "Name": "Delete Action",
+  "Name": "Log Action",
   "Description": "Test Description",
   "Category": "Fine Dining",
   "HasDelivery": true,
