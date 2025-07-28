@@ -12,7 +12,7 @@ public static class ServiceCollectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("RestaurantsDb");
+        var connectionString = configuration.GetConnectionString("RestaurantsDbForSqlServer");
         services.AddDbContext<RestaurantsDbContext>(options => 
             options.UseSqlServer(connectionString)
                 .EnableSensitiveDataLogging()); // Database loglarini olish uchun kerak.
