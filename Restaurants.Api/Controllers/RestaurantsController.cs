@@ -15,13 +15,14 @@ namespace Restaurants.Api.Controllers;
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll()
     {
         var restaurants = await mediator.Send(new GetAllRestaurantsQuery());
         return Ok(restaurants);
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RestaurantDto))] // It just shows what type this method returns.
     public async Task<IActionResult> GetById([FromRoute]int id)
     {
         var restaurant = await mediator.Send(new GetRestaurantByIdQuery(id));
@@ -33,6 +34,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteRestaurant([FromRoute]int id)
     {
         var isDeleted = await mediator.Send(new DeleteRestaurantCommand(id));

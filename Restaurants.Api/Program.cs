@@ -10,15 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 /* Serilog Section*/
 builder.Host.UseSerilog((context, configuration) => 
-    configuration
-        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-        .WriteTo.Console(outputTemplate:"[{Timestamp: dd-MM HH:mm:ss} {SourceContext} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+    configuration.ReadFrom.Configuration(context.Configuration)
 );
 
 var app = builder.Build();
@@ -29,6 +28,13 @@ var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
 await seeder.Seed(); 
 
 // Configure the HTTP request pipeline.
+app.UseSerilogRequestLogging();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
