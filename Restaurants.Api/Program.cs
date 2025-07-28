@@ -1,3 +1,4 @@
+using Restaurants.Api.Middlewares;
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
@@ -12,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ErrorHandlingMiddle>();
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -22,10 +25,12 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
-var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+// var scope = app.Services.CreateScope();
+// var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+//
+// await seeder.Seed();
 
-await seeder.Seed(); 
+app.UseMiddleware<ErrorHandlingMiddle>();
 
 // Configure the HTTP request pipeline.
 app.UseSerilogRequestLogging();
@@ -43,3 +48,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+    
