@@ -51,4 +51,13 @@ Content-Type: application/json
   "restaurantId": 2
 }
 
+###
+
+POST http://localhost:5239/register
+Content-Type: application/json
+
+{
+  "email": "testuser@gmail.com",
+  "password": "Password1?"
+}
 
