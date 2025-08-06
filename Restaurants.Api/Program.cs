@@ -21,10 +21,10 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
-// var scope = app.Services.CreateScope();
-// var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
-//
-// await seeder.Seed();
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+
+await seeder.Seed();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<RequestTimeLoggingMiddleware>();
